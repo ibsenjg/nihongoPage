@@ -9,6 +9,8 @@ import {
   useLocation,
 } from "react-router-dom";
 import "./App.css";
+import { LanguageProvider, useLanguage } from "./i18n";
+import type { Translator } from "./i18n";
 
 type PlaceholderVariant =
   | "teacher"
@@ -29,89 +31,102 @@ type Card = {
   variant: PlaceholderVariant;
 };
 
-const courses: Card[] = [
-  {
-    eyebrow: "Formación continua",
-    title: "Cursos anuales de japonés",
-    description:
-      "Un recorrido guiado por niveles, con una base sólida y tiempo para afianzar cada paso.",
-    to: "/cursos/anuales",
-    variant: "annual",
-  },
-  {
-    eyebrow: "Aprendizaje flexible",
-    title: "Cursos temáticos de japonés",
-    description:
-      "Retos concretos para empezar desde cero, mejorar tu gramática o profundizar en un tema.",
-    to: "/cursos/tematicos",
-    variant: "thematic",
-  },
-];
+function getCourses(t: Translator): Card[] {
+  return [
+    {
+      eyebrow: t("Formación continua"),
+      title: t("Cursos anuales de japonés"),
+      description: t(
+        "Un recorrido guiado por niveles, con una base sólida y tiempo para afianzar cada paso.",
+      ),
+      to: "/cursos/anuales",
+      variant: "annual",
+    },
+    {
+      eyebrow: t("Aprendizaje flexible"),
+      title: t("Cursos temáticos de japonés"),
+      description: t(
+        "Retos concretos para empezar desde cero, mejorar tu gramática o profundizar en un tema.",
+      ),
+      to: "/cursos/tematicos",
+      variant: "thematic",
+    },
+  ];
+}
 
-const annualCourses = [
-  [
-    "A1.1",
-    "Nivel inicial desde cero",
-    "Tu primera base de escritura, vocabulario y conversación.",
-  ],
-  [
-    "A1.2",
-    "Nivel inicial II",
-    "Consolida lo aprendido y empieza a expresarte con más soltura.",
-  ],
-  [
-    "A2.1",
-    "Nivel elemental I",
-    "Amplía estructuras y comprende situaciones cotidianas.",
-  ],
-  [
-    "A2.2",
-    "Nivel elemental II",
-    "Gana autonomía para comunicarte con naturalidad.",
-  ],
-  [
-    "B1.1",
-    "Nivel intermedio I",
-    "Da el salto a textos y conversaciones más complejas.",
-  ],
-  [
-    "B1.2",
-    "Nivel intermedio II",
-    "Profundiza y conecta todas tus competencias.",
-  ],
-];
+function getAnnualCourses(t: Translator) {
+  return [
+    [
+      "A1.1",
+      t("Nivel inicial desde cero"),
+      t("Tu primera base de escritura, vocabulario y conversación."),
+    ],
+    [
+      "A1.2",
+      t("Nivel inicial II"),
+      t("Consolida lo aprendido y empieza a expresarte con más soltura."),
+    ],
+    [
+      "A2.1",
+      t("Nivel elemental I"),
+      t("Amplía estructuras y comprende situaciones cotidianas."),
+    ],
+    [
+      "A2.2",
+      t("Nivel elemental II"),
+      t("Gana autonomía para comunicarte con naturalidad."),
+    ],
+    [
+      "B1.1",
+      t("Nivel intermedio I"),
+      t("Da el salto a textos y conversaciones más complejas."),
+    ],
+    [
+      "B1.2",
+      t("Nivel intermedio II"),
+      t("Profundiza y conecta todas tus competencias."),
+    ],
+  ];
+}
 
-const thematicCourses = [
-  [
-    "旅",
-    "Japonés para viajeros",
-    "Frases, costumbres y recursos para disfrutar de tu viaje.",
-  ],
-  [
-    "あ",
-    "Hiragana y katakana",
-    "Aprende a leer y escribir los dos silabarios paso a paso.",
-  ],
-  [
-    "文",
-    "Gramática japonesa",
-    "Ordena lo que sabes y entiende cómo funciona el idioma.",
-  ],
-  [
-    "読",
-    "Entrenamiento de lectura",
-    "Mejora ritmo, comprensión y confianza con textos graduados.",
-  ],
-];
+function getThematicCourses(t: Translator) {
+  return [
+    [
+      t("旅"),
+      t("Japonés para viajeros"),
+      t("Frases, costumbres y recursos para disfrutar de tu viaje."),
+    ],
+    [
+      t("あ"),
+      t("Hiragana y katakana"),
+      t("Aprende a leer y escribir los dos silabarios paso a paso."),
+    ],
+    [
+      t("文"),
+      t("Gramática japonesa"),
+      t("Ordena lo que sabes y entiende cómo funciona el idioma."),
+    ],
+    [
+      t("読"),
+      t("Entrenamiento de lectura"),
+      t("Mejora ritmo, comprensión y confianza con textos graduados."),
+    ],
+  ];
+}
 
 function Logo() {
+  const { language, t } = useLanguage();
+
   return (
-    <Link className="logo" to="/" aria-label="Nihongo (日本語), inicio">
-      <span className="logo-mark" aria-hidden="true">
-        日
+    <Link className="logo" to="/" aria-label={t("Nihongo (日本語), inicio")}>
+      <span
+        className={`logo-mark${language === "ja" ? " logo-mark-latin" : ""}`}
+        aria-hidden="true"
+      >
+        {language === "ja" ? "ES" : "日"}
       </span>
       <span>
-        <strong>Nihongo (日本語)</strong>
+        <strong>{t("Nihongo (日本語)")}</strong>
       </span>
     </Link>
   );
@@ -126,7 +141,8 @@ function Placeholder({
   label: string;
   compact?: boolean;
 }) {
-  const glyphs: Record<PlaceholderVariant, string> = {
+  const { language, t } = useLanguage();
+  const japaneseGlyphs: Record<PlaceholderVariant, string> = {
     teacher: "先生",
     calendar: "日",
     desk: "学",
@@ -137,6 +153,18 @@ function Placeholder({
     book: "読",
     free: "始",
   };
+  const spanishGlyphs: Record<PlaceholderVariant, string> = {
+    teacher: "Profe",
+    calendar: "Día",
+    desk: "Aula",
+    materials: "Libro",
+    community: "Juntos",
+    annual: "Ruta",
+    thematic: "Tema",
+    book: "Leer",
+    free: "Inicio",
+  };
+  const glyphs = language === "ja" ? spanishGlyphs : japaneseGlyphs;
 
   return (
     <div
@@ -147,14 +175,19 @@ function Placeholder({
       <span className="sun" />
       <span className="cloud cloud-one" />
       <span className="cloud cloud-two" />
-      <span className="placeholder-glyph">{glyphs[variant]}</span>
-      <span className="placeholder-label">Imagen de muestra</span>
+      <span
+        className={`placeholder-glyph${language === "ja" ? " placeholder-glyph-latin" : ""}`}
+      >
+        {glyphs[variant]}
+      </span>
+      <span className="placeholder-label">{t("Imagen de muestra")}</span>
     </div>
   );
 }
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const { language, t, toggleLanguage } = useLanguage();
   const closeMenu = () => setOpen(false);
 
   const navClass = ({ isActive }: { isActive: boolean }) =>
@@ -164,15 +197,24 @@ function Header() {
     <header>
       <div className="topbar">
         <div className="container topbar-inner">
-          <span>Aprende japonés con calma y constancia</span>
+          <span>{t("Aprende japonés con calma y constancia")}</span>
           <div className="topbar-links">
-            <a href="#newsletter">Newsletter</a>
+            <a href="#newsletter">{t("Newsletter")}</a>
             <span
               className="login-later"
-              title="Se añadirá en una fase posterior"
+              title={t("Se añadirá en una fase posterior")}
             >
-              Acceso escuela · próximamente
+              {t("Acceso escuela · próximamente")}
             </span>
+            <button
+              className="language-toggle"
+              type="button"
+              aria-label={t("Cambiar idioma a japonés")}
+              onClick={toggleLanguage}
+            >
+              <span aria-hidden="true">◎</span>
+              {language === "es" ? "日本語" : "Español"}
+            </button>
           </div>
         </div>
       </div>
@@ -182,7 +224,7 @@ function Header() {
           <button
             className="menu-toggle"
             type="button"
-            aria-label={open ? "Cerrar menú" : "Abrir menú"}
+            aria-label={t(open ? "Cerrar menú" : "Abrir menú")}
             aria-expanded={open}
             onClick={() => setOpen((value) => !value)}
           >
@@ -192,26 +234,26 @@ function Header() {
           </button>
           <nav
             className={open ? "nav-links open" : "nav-links"}
-            aria-label="Principal"
+            aria-label={t("Principal")}
           >
             <NavLink className={navClass} to="/cursos" onClick={closeMenu}>
-              Cursos
+              {t("Cursos")}
             </NavLink>
             <NavLink className={navClass} to="/libros" onClick={closeMenu}>
-              Libros
+              {t("Libros")}
             </NavLink>
             <NavLink className={navClass} to="/materiales" onClick={closeMenu}>
-              Materiales
+              {t("Materiales")}
             </NavLink>
             <NavLink
               className={navClass}
               to="/aprende-gratis"
               onClick={closeMenu}
             >
-              Aprende gratis
+              {t("Aprende gratis")}
             </NavLink>
             <NavLink className={navClass} to="/nosotros" onClick={closeMenu}>
-              Conócenos
+              {t("Conócenos")}
             </NavLink>
           </nav>
         </div>
@@ -221,44 +263,48 @@ function Header() {
 }
 
 function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="footer">
       <div className="container footer-grid">
         <div className="footer-brand">
           <Logo />
           <p>
-            Una escuela online para acercarte al japonés y a su cultura a tu
-            ritmo.
+            {t(
+              "Una escuela online para acercarte al japonés y a su cultura a tu ritmo.",
+            )}
           </p>
-          <div className="socials" aria-label="Redes sociales de muestra">
+          <div className="socials" aria-label={t("Redes sociales de muestra")}>
             <span>ig</span>
             <span>yt</span>
             <span>in</span>
           </div>
         </div>
         <div>
-          <h3>Empieza por aquí</h3>
-          <Link to="/cursos">Cursos de japonés</Link>
-          <Link to="/aprende-gratis">Aprende gratis</Link>
-          <Link to="/materiales">Materiales didácticos</Link>
+          <h3>{t("Empieza por aquí")}</h3>
+          <Link to="/cursos">{t("Cursos de japonés")}</Link>
+          <Link to="/aprende-gratis">{t("Aprende gratis")}</Link>
+          <Link to="/materiales">{t("Materiales didácticos")}</Link>
         </div>
         <div>
-          <h3>Sobre nosotros</h3>
-          <Link to="/nosotros">El proyecto</Link>
-          <Link to="/contacto">Contacto</Link>
-          <span>Preguntas frecuentes · después</span>
+          <h3>{t("Sobre nosotros")}</h3>
+          <Link to="/nosotros">{t("El proyecto")}</Link>
+          <Link to="/contacto">{t("Contacto")}</Link>
+          <span>{t("Preguntas frecuentes · después")}</span>
         </div>
         <div>
-          <h3>Estado del MVP</h3>
+          <h3>{t("Estado del MVP")}</h3>
           <p>
-            Las compras, el aula y el acceso de alumnado quedan fuera de esta
-            primera versión.
+            {t(
+              "Las compras, el aula y el acceso de alumnado quedan fuera de esta primera versión.",
+            )}
           </p>
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>© 2026 Nihongo (日本語) · Proyecto demostrativo</span>
-        <span>Privacidad · Cookies · Aviso legal</span>
+        <span>{t("© 2026 Nihongo (日本語) · Proyecto demostrativo")}</span>
+        <span>{t("Privacidad · Cookies · Aviso legal")}</span>
       </div>
     </footer>
   );
@@ -302,6 +348,7 @@ function SectionTitle({
 
 function Newsletter() {
   const [submitted, setSubmitted] = useState(false);
+  const { t } = useLanguage();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitted(true);
@@ -310,36 +357,42 @@ function Newsletter() {
   return (
     <section className="newsletter" id="newsletter">
       <div className="container split-section newsletter-inner">
-        <Placeholder variant="free" label="Ilustración de newsletter" compact />
+        <Placeholder
+          variant="free"
+          label={t("Ilustración de newsletter")}
+          compact
+        />
         <div>
-          <span className="eyebrow">Nihongo snacks</span>
-          <h2>Japonés sin agobios, directo a tu bandeja de entrada.</h2>
+          <span className="eyebrow">{t("Nihongo snacks")}</span>
+          <h2>{t("Japonés sin agobios, directo a tu bandeja de entrada.")}</h2>
           <p>
-            Una píldora breve con vocabulario, cultura y consejos prácticos para
-            mantener la motivación.
+            {t(
+              "Una píldora breve con vocabulario, cultura y consejos prácticos para mantener la motivación.",
+            )}
           </p>
           {submitted ? (
             <div className="form-success" role="status">
-              ¡Gracias! El formulario de demostración funciona; conectaremos el
-              envío más adelante.
+              {t(
+                "¡Gracias! El formulario de demostración funciona; conectaremos el envío más adelante.",
+              )}
             </div>
           ) : (
             <form className="signup-form" onSubmit={handleSubmit}>
               <label>
-                <span>Nombre</span>
-                <input name="name" placeholder="Tu nombre" required />
+                <span>{t("Nombre")}</span>
+                <input name="name" placeholder={t("Tu nombre")} required />
               </label>
               <label>
-                <span>Correo electrónico</span>
+                <span>{t("Correo electrónico")}</span>
                 <input
                   name="email"
                   type="email"
-                  placeholder="tu@email.com"
+                  placeholder={t("tu@email.com")}
                   required
                 />
               </label>
               <button className="button button-red" type="submit">
-                Quiero mis snacks <span aria-hidden="true">→</span>
+                {t("Quiero mis snacks")} <span aria-hidden="true">→</span>
               </button>
             </form>
           )}
@@ -350,21 +403,25 @@ function Newsletter() {
 }
 
 function HomePage() {
+  const { t } = useLanguage();
+  const courses = getCourses(t);
   const features = [
     [
       "calendar",
-      "Avanza a tu ritmo",
-      "Sin fechas que te agobien. Tú decides cuándo estudiar y cuánto avanzar.",
+      t("Avanza a tu ritmo"),
+      t(
+        "Sin fechas que te agobien. Tú decides cuándo estudiar y cuánto avanzar.",
+      ),
     ],
     [
       "desk",
-      "Tu aula siempre abierta",
-      "Estudia donde quieras. Solo necesitas conexión y ganas de aprender.",
+      t("Tu aula siempre abierta"),
+      t("Estudia donde quieras. Solo necesitas conexión y ganas de aprender."),
     ],
     [
       "materials",
-      "Recursos que sí ayudan",
-      "Ejercicios y materiales claros para practicar entre lecciones.",
+      t("Recursos que sí ayudan"),
+      t("Ejercicios y materiales claros para practicar entre lecciones."),
     ],
   ] as const;
 
@@ -373,27 +430,29 @@ function HomePage() {
       <section className="hero-section">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <span className="japanese-kicker">ようこそ</span>
+            <span className="japanese-kicker">{t("ようこそ")}</span>
             <h1>
-              El japonés no se aprende con trucos. Se aprende recorriendo el
-              camino.
+              {t(
+                "El japonés no se aprende con trucos. Se aprende recorriendo el camino.",
+              )}
             </h1>
             <p>
-              Una escuela online que combina método, cultura y acompañamiento
-              para estudiantes de habla hispana.
+              {t(
+                "Una escuela online que combina método, cultura y acompañamiento para estudiantes de habla hispana.",
+              )}
             </p>
             <div className="button-row">
               <Link className="button button-red" to="/cursos">
-                Descubre tu camino <span aria-hidden="true">→</span>
+                {t("Descubre tu camino")} <span aria-hidden="true">→</span>
               </Link>
               <Link className="text-link" to="/nosotros">
-                Conoce la escuela
+                {t("Conoce la escuela")}
               </Link>
             </div>
           </div>
           <Placeholder
             variant="teacher"
-            label="Retrato de profesor pendiente"
+            label={t("Retrato de profesor pendiente")}
           />
         </div>
         <div className="wave wave-white" />
@@ -401,12 +460,13 @@ function HomePage() {
 
       <section className="section intro-section">
         <div className="container narrow">
-          <SectionTitle eyebrow="Un método que encaja contigo">
-            ¡Tu nueva forma de aprender Japonés, esta te funciona!
+          <SectionTitle eyebrow={t("Un método que encaja contigo")}>
+            {t("¡Tu nueva forma de aprender Japonés, esta te funciona!")}
           </SectionTitle>
           <p className="lead centered">
-            Respetamos tu tiempo y tu forma de estudiar. Tú marcas el ritmo;
-            nosotros ponemos el mapa, la práctica y el acompañamiento.
+            {t(
+              "Respetamos tu tiempo y tu forma de estudiar. Tú marcas el ritmo; nosotros ponemos el mapa, la práctica y el acompañamiento.",
+            )}
           </p>
         </div>
         <div className="container feature-grid">
@@ -414,7 +474,7 @@ function HomePage() {
             <article className="feature-card" key={title}>
               <Placeholder
                 variant={variant}
-                label={`Imagen pendiente: ${title}`}
+                label={`${t("Imagen pendiente:")} ${title}`}
                 compact
               />
               <h3>{title}</h3>
@@ -429,37 +489,37 @@ function HomePage() {
         <div className="container stats-grid">
           <div>
             <strong>10+</strong>
-            <span>años acompañando a estudiantes</span>
+            <span>{t("años acompañando a estudiantes")}</span>
           </div>
           <div>
             <strong>5.000</strong>
-            <span>alumnos en nuestra comunidad</span>
+            <span>{t("alumnos en nuestra comunidad")}</span>
           </div>
           <div>
             <strong>20+</strong>
-            <span>cursos para distintas etapas</span>
+            <span>{t("cursos para distintas etapas")}</span>
           </div>
         </div>
       </section>
 
       <section className="section courses-section">
         <div className="container">
-          <SectionTitle eyebrow="Elige tu siguiente paso">
-            Un curso para acercarte un poco más a Japón
+          <SectionTitle eyebrow={t("Elige tu siguiente paso")}>
+            {t("Un curso para acercarte un poco más a Japón")}
           </SectionTitle>
           <div className="course-grid">
             {courses.map((course) => (
               <article className="course-card" key={course.title}>
                 <Placeholder
                   variant={course.variant}
-                  label={`Imagen pendiente: ${course.title}`}
+                  label={`${t("Imagen pendiente:")} ${course.title}`}
                 />
                 <div className="course-card-copy">
                   <span className="eyebrow">{course.eyebrow}</span>
                   <h3>{course.title}</h3>
                   <p>{course.description}</p>
                   <Link className="button button-blue" to={course.to}>
-                    Ver cursos <span aria-hidden="true">→</span>
+                    {t("Ver cursos")} <span aria-hidden="true">→</span>
                   </Link>
                 </div>
               </article>
@@ -471,23 +531,24 @@ function HomePage() {
       <section className="blue-story">
         <div className="container split-section">
           <div>
-            <span className="japanese-kicker">いっしょに</span>
+            <span className="japanese-kicker">{t("いっしょに")}</span>
             <h2>
-              Una escuela con personas. Sin atajos, pero con un equipo a tu
-              lado.
+              {t(
+                "Una escuela con personas. Sin atajos, pero con un equipo a tu lado.",
+              )}
             </h2>
             <p>
-              Te damos una ruta clara, explicaciones pensadas para
-              hispanohablantes y una comunidad que entiende lo que cuesta
-              aprender algo nuevo.
+              {t(
+                "Te damos una ruta clara, explicaciones pensadas para hispanohablantes y una comunidad que entiende lo que cuesta aprender algo nuevo.",
+              )}
             </p>
             <Link className="button button-red" to="/nosotros">
-              ¿Te vienes? <span aria-hidden="true">→</span>
+              {t("¿Te vienes?")} <span aria-hidden="true">→</span>
             </Link>
           </div>
           <Placeholder
             variant="community"
-            label="Foto de la comunidad pendiente"
+            label={t("Foto de la comunidad pendiente")}
           />
         </div>
       </section>
@@ -496,22 +557,24 @@ function HomePage() {
 
       <section className="section testimonials">
         <div className="container">
-          <SectionTitle eyebrow="Voces de la comunidad">
-            Así se vive aprender con nosotros
+          <SectionTitle eyebrow={t("Voces de la comunidad")}>
+            {t("Así se vive aprender con nosotros")}
           </SectionTitle>
           <div className="testimonial-grid">
             {[
               [
-                "“Por fin entiendo por qué se construyen así las frases.”",
-                "Lucía · nivel inicial",
+                t("“Por fin entiendo por qué se construyen así las frases.”"),
+                t("Lucía · nivel inicial"),
               ],
               [
-                "“Puedo estudiar sin sentir que siempre llego tarde.”",
-                "Marcos · curso temático",
+                t("“Puedo estudiar sin sentir que siempre llego tarde.”"),
+                t("Marcos · curso temático"),
               ],
               [
-                "“La mezcla de idioma y cultura mantiene viva mi curiosidad.”",
-                "Eva · nivel A2",
+                t(
+                  "“La mezcla de idioma y cultura mantiene viva mi curiosidad.”",
+                ),
+                t("Eva · nivel A2"),
               ],
             ].map(([quote, author]) => (
               <blockquote key={author}>
@@ -538,6 +601,8 @@ function PageHero({
   description: string;
   variant: PlaceholderVariant;
 }) {
+  const { t } = useLanguage();
+
   return (
     <section className="page-hero">
       <div className="container page-hero-grid">
@@ -548,7 +613,7 @@ function PageHero({
         </div>
         <Placeholder
           variant={variant}
-          label={`Imagen pendiente: ${title}`}
+          label={`${t("Imagen pendiente:")} ${title}`}
           compact
         />
       </div>
@@ -557,12 +622,17 @@ function PageHero({
 }
 
 function CoursesPage() {
+  const { t } = useLanguage();
+  const courses = getCourses(t);
+
   return (
     <>
       <PageHero
-        eyebrow="学ぶ"
-        title="Cursos de japonés para cada etapa"
-        description="Empieza desde cero, retoma lo que dejaste a medias o enfócate en una habilidad concreta."
+        eyebrow={t("学ぶ")}
+        title={t("Cursos de japonés para cada etapa")}
+        description={t(
+          "Empieza desde cero, retoma lo que dejaste a medias o enfócate en una habilidad concreta.",
+        )}
         variant="annual"
       />
       <section className="section">
@@ -571,14 +641,14 @@ function CoursesPage() {
             <article className="course-card" key={course.title}>
               <Placeholder
                 variant={course.variant}
-                label={`Imagen pendiente: ${course.title}`}
+                label={`${t("Imagen pendiente:")} ${course.title}`}
               />
               <div className="course-card-copy">
                 <span className="eyebrow">{course.eyebrow}</span>
                 <h2>{course.title}</h2>
                 <p>{course.description}</p>
                 <Link className="button button-blue" to={course.to}>
-                  Explorar <span aria-hidden="true">→</span>
+                  {t("Explorar")} <span aria-hidden="true">→</span>
                 </Link>
               </div>
             </article>
@@ -601,10 +671,12 @@ function CatalogPage({
   description: string;
   items: string[][];
 }) {
+  const { language, t } = useLanguage();
+
   return (
     <>
       <PageHero
-        eyebrow={type === "annual" ? "長い道" : "好きなこと"}
+        eyebrow={t(type === "annual" ? "長い道" : "好きなこと")}
         title={title}
         description={description}
         variant={type}
@@ -613,11 +685,15 @@ function CatalogPage({
         <div className="container catalog-grid">
           {items.map(([badge, itemTitle, itemDescription]) => (
             <article className="catalog-card" key={itemTitle}>
-              <span className="catalog-badge">{badge}</span>
+              <span
+                className={`catalog-badge${language === "ja" && type === "thematic" ? " catalog-badge-latin" : ""}`}
+              >
+                {badge}
+              </span>
               <h2>{itemTitle}</h2>
               <p>{itemDescription}</p>
               <button className="button button-outline" type="button" disabled>
-                Detalles próximamente
+                {t("Detalles próximamente")}
               </button>
             </article>
           ))}
@@ -629,41 +705,45 @@ function CatalogPage({
 }
 
 function ResourcePage({ kind }: { kind: "books" | "materials" | "free" }) {
+  const { t } = useLanguage();
   const copy = {
     books: {
-      eyebrow: "読む",
-      title: "Libros para seguir aprendiendo",
-      description:
+      eyebrow: t("読む"),
+      title: t("Libros para seguir aprendiendo"),
+      description: t(
         "Lecturas y cuadernos diseñados para convertir la curiosidad en práctica.",
+      ),
       variant: "book" as PlaceholderVariant,
       items: [
-        "Japonés para viajeros",
-        "La magia de los kanji",
-        "Lecturas graduadas",
+        t("Japonés para viajeros"),
+        t("La magia de los kanji"),
+        t("Lecturas graduadas"),
       ],
     },
     materials: {
-      eyebrow: "練習",
-      title: "Materiales didácticos",
-      description:
+      eyebrow: t("練習"),
+      title: t("Materiales didácticos"),
+      description: t(
         "Recursos sencillos para organizar el estudio y practicar de forma constante.",
+      ),
       variant: "materials" as PlaceholderVariant,
       items: [
-        "Cuaderno de escritura",
-        "Planificador de estudio",
-        "Kit de preparación JLPT",
+        t("Cuaderno de escritura"),
+        t("Planificador de estudio"),
+        t("Kit de preparación JLPT"),
       ],
     },
     free: {
-      eyebrow: "無料",
-      title: "Empieza a aprender gratis",
-      description:
+      eyebrow: t("無料"),
+      title: t("Empieza a aprender gratis"),
+      description: t(
         "Prueba el método con pequeñas lecciones y descubre por dónde continuar.",
+      ),
       variant: "free" as PlaceholderVariant,
       items: [
-        "Guía para empezar",
-        "Mini lecciones por email",
-        "Recursos de vocabulario",
+        t("Guía para empezar"),
+        t("Mini lecciones por email"),
+        t("Recursos de vocabulario"),
       ],
     },
   }[kind];
@@ -677,23 +757,24 @@ function ResourcePage({ kind }: { kind: "books" | "materials" | "free" }) {
             <article className="resource-card" key={item}>
               <Placeholder
                 variant={copy.variant}
-                label={`Imagen pendiente: ${item}`}
+                label={`${t("Imagen pendiente:")} ${item}`}
                 compact
               />
               <span className="eyebrow">
-                Recurso {String(index + 1).padStart(2, "0")}
+                {t("Recurso")} {String(index + 1).padStart(2, "0")}
               </span>
               <h2>{item}</h2>
               <p>
-                Contenido de muestra para definir la estructura antes de
-                incorporar el catálogo real.
+                {t(
+                  "Contenido de muestra para definir la estructura antes de incorporar el catálogo real.",
+                )}
               </p>
               <button
                 className="text-link disabled-link"
                 type="button"
                 disabled
               >
-                Disponible más adelante
+                {t("Disponible más adelante")}
               </button>
             </article>
           ))}
@@ -705,30 +786,40 @@ function ResourcePage({ kind }: { kind: "books" | "materials" | "free" }) {
 }
 
 function AboutPage() {
+  const { t } = useLanguage();
+
   return (
     <>
       <PageHero
-        eyebrow="私たち"
-        title="Mucho más que una pantalla con lecciones"
-        description="Un proyecto nacido para explicar japonés a hispanohablantes con claridad, contexto y cercanía."
+        eyebrow={t("私たち")}
+        title={t("Mucho más que una pantalla con lecciones")}
+        description={t(
+          "Un proyecto nacido para explicar japonés a hispanohablantes con claridad, contexto y cercanía.",
+        )}
         variant="teacher"
       />
       <section className="section about-story">
         <div className="container split-section reverse-mobile">
-          <Placeholder variant="teacher" label="Foto del equipo pendiente" />
+          <Placeholder
+            variant="teacher"
+            label={t("Foto del equipo pendiente")}
+          />
           <div>
-            <span className="eyebrow">Nuestra manera de enseñar</span>
+            <span className="eyebrow">{t("Nuestra manera de enseñar")}</span>
             <h2>
-              Japón se entiende mejor cuando idioma y cultura avanzan juntos.
+              {t(
+                "Japón se entiende mejor cuando idioma y cultura avanzan juntos.",
+              )}
             </h2>
             <p>
-              La escuela combina una mirada nativa con explicaciones pensadas
-              para las dudas que aparecen al aprender desde el español.
+              {t(
+                "La escuela combina una mirada nativa con explicaciones pensadas para las dudas que aparecen al aprender desde el español.",
+              )}
             </p>
             <p>
-              Este MVP presenta la experiencia pública. Los perfiles reales, el
-              equipo completo y el acceso al aula se incorporarán en fases
-              posteriores.
+              {t(
+                "Este MVP presenta la experiencia pública. Los perfiles reales, el equipo completo y el acceso al aula se incorporarán en fases posteriores.",
+              )}
             </p>
           </div>
         </div>
@@ -736,9 +827,17 @@ function AboutPage() {
       <section className="values-section">
         <div className="container values-grid">
           {[
-            ["01", "Claridad", "Explicar bien antes que impresionar."],
-            ["02", "Constancia", "Un poco cada día vale más que un sprint."],
-            ["03", "Cercanía", "Aprender acompañado cambia el recorrido."],
+            ["01", t("Claridad"), t("Explicar bien antes que impresionar.")],
+            [
+              "02",
+              t("Constancia"),
+              t("Un poco cada día vale más que un sprint."),
+            ],
+            [
+              "03",
+              t("Cercanía"),
+              t("Aprender acompañado cambia el recorrido."),
+            ],
           ].map(([number, title, text]) => (
             <article key={title}>
               <span>{number}</span>
@@ -754,29 +853,35 @@ function AboutPage() {
 
 function ContactPage() {
   const [sent, setSent] = useState(false);
+  const { t } = useLanguage();
+
   return (
     <>
       <PageHero
-        eyebrow="連絡"
-        title="Hablemos"
-        description="Cuéntanos qué quieres aprender y te ayudaremos a encontrar el mejor punto de partida."
+        eyebrow={t("連絡")}
+        title={t("Hablemos")}
+        description={t(
+          "Cuéntanos qué quieres aprender y te ayudaremos a encontrar el mejor punto de partida.",
+        )}
         variant="community"
       />
       <section className="section contact-section">
         <div className="container contact-grid">
           <div>
-            <span className="eyebrow">Contacto</span>
-            <h2>Estamos al otro lado</h2>
+            <span className="eyebrow">{t("Contacto")}</span>
+            <h2>{t("Estamos al otro lado")}</h2>
             <p>
-              Este formulario es interactivo, aunque todavía no envía datos a
-              ningún servicio.
+              {t(
+                "Este formulario es interactivo, aunque todavía no envía datos a ningún servicio.",
+              )}
             </p>
             <a href="mailto:hola@nihongo.local">hola@nihongo.local</a>
           </div>
           {sent ? (
             <div className="form-success large" role="status">
-              Mensaje preparado. Conectaremos el envío real en una fase
-              posterior.
+              {t(
+                "Mensaje preparado. Conectaremos el envío real en una fase posterior.",
+              )}
             </div>
           ) : (
             <form
@@ -787,19 +892,19 @@ function ContactPage() {
               }}
             >
               <label>
-                Nombre
+                {t("Nombre")}
                 <input name="name" required />
               </label>
               <label>
-                Correo electrónico
+                {t("Correo electrónico")}
                 <input name="email" type="email" required />
               </label>
               <label>
-                ¿En qué podemos ayudarte?
+                {t("¿En qué podemos ayudarte?")}
                 <textarea name="message" rows={5} required />
               </label>
               <button className="button button-red" type="submit">
-                Preparar mensaje <span aria-hidden="true">→</span>
+                {t("Preparar mensaje")} <span aria-hidden="true">→</span>
               </button>
             </form>
           )}
@@ -810,13 +915,15 @@ function ContactPage() {
 }
 
 function SimpleCta() {
+  const { t } = useLanguage();
+
   return (
     <section className="simple-cta">
       <div className="container">
-        <span className="japanese-kicker">一歩ずつ</span>
-        <h2>¡El japonés es fácil, solo hay que saber algunas cosas!</h2>
+        <span className="japanese-kicker">{t("一歩ずつ")}</span>
+        <h2>{t("¡El japonés es fácil, solo hay que saber algunas cosas!")}</h2>
         <Link className="button button-red" to="/aprende-gratis">
-          Probar recursos gratis <span aria-hidden="true">→</span>
+          {t("Probar recursos gratis")} <span aria-hidden="true">→</span>
         </Link>
       </div>
     </section>
@@ -824,20 +931,24 @@ function SimpleCta() {
 }
 
 function NotFoundPage() {
+  const { t } = useLanguage();
+
   return (
     <section className="not-found">
       <div className="container">
-        <span className="japanese-kicker">迷子</span>
-        <h1>Esta página se ha perdido por el camino.</h1>
+        <span className="japanese-kicker">{t("迷子")}</span>
+        <h1>{t("Esta página se ha perdido por el camino.")}</h1>
         <Link className="button button-red" to="/">
-          Volver al inicio
+          {t("Volver al inicio")}
         </Link>
       </div>
     </section>
   );
 }
 
-function App() {
+function AppRoutes() {
+  const { t } = useLanguage();
+
   return (
     <Routes>
       <Route element={<SiteLayout />}>
@@ -848,9 +959,11 @@ function App() {
           element={
             <CatalogPage
               type="annual"
-              title="Cursos anuales: una ruta completa"
-              description="Programas por niveles para aprender con estructura, práctica y acompañamiento."
-              items={annualCourses}
+              title={t("Cursos anuales: una ruta completa")}
+              description={t(
+                "Programas por niveles para aprender con estructura, práctica y acompañamiento.",
+              )}
+              items={getAnnualCourses(t)}
             />
           }
         />
@@ -859,9 +972,11 @@ function App() {
           element={
             <CatalogPage
               type="thematic"
-              title="Cursos temáticos: elige tu reto"
-              description="Formaciones más cortas para trabajar una necesidad concreta a tu propio ritmo."
-              items={thematicCourses}
+              title={t("Cursos temáticos: elige tu reto")}
+              description={t(
+                "Formaciones más cortas para trabajar una necesidad concreta a tu propio ritmo.",
+              )}
+              items={getThematicCourses(t)}
             />
           }
         />
@@ -873,6 +988,14 @@ function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
+  );
+}
+
+function App() {
+  return (
+    <LanguageProvider>
+      <AppRoutes />
+    </LanguageProvider>
   );
 }
 
