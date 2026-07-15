@@ -124,8 +124,10 @@ visual baselines** workflow from GitHub Actions. It runs only on manual request,
 does not deploy or modify the repository, and uploads both the complete Linux
 image set and a binary patch for review. Download the artifact, inspect the
 images, apply `linux-visual-baselines.patch`, and run the normal verification
-gate before committing. CI, the helper, and the generation workflow all pin
-Playwright's `v1.61.1-noble` image.
+gate before committing. Normal CI refuses to create missing snapshots, while
+the generation command explicitly uses Playwright's `all` update mode. CI, the
+helper, and the generation workflow all pin Playwright's `v1.61.1-noble`
+image.
 
 Playwright owns the routed journeys and visual baselines. It saves failure-only screenshots, retains traces on failures, and embeds full axe JSON results in its HTML report. Vitest remains the sole coverage runner and still saves browser evidence for unexpected component-test failures. CI uploads both runners' failure artifacts and coverage output.
 

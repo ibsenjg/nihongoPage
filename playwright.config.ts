@@ -8,6 +8,7 @@ export default defineConfig({
   outputDir: "test-results",
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
+  updateSnapshots: process.env.CI ? "none" : "missing",
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: [
