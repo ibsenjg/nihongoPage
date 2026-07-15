@@ -19,7 +19,7 @@
     "test:e2e": "pnpm build && playwright test",
     "test:e2e:ui": "pnpm build && playwright test --ui",
     "test:e2e:headed": "pnpm build && playwright test --headed --workers=1",
-    "test:e2e:update": "pnpm build && playwright test tests/e2e/visual.spec.ts --project=desktop --project=mobile --update-snapshots",
+    "test:e2e:update": "pnpm build && playwright test tests/e2e/visual.spec.ts --project=desktop --project=mobile --update-snapshots=all",
     "test:e2e:update:container": "./scripts/update-visuals-in-container.sh",
     "test:update-snapshots": "pnpm test:e2e:update",
     "verify": "pnpm lint && pnpm format:check && pnpm test:coverage && pnpm test:e2e"
