@@ -70,8 +70,8 @@ pnpm test:full       # Run Vitest coverage, then the Playwright E2E matrix
 pnpm test:e2e        # Build and run the Playwright E2E matrix
 pnpm test:e2e:ui     # Open Playwright UI Mode to run and inspect tests visually
 pnpm test:e2e:headed # Watch the full E2E matrix run in a visible browser
-pnpm test:e2e:update # Force-refresh every Chromium visual baseline
-pnpm test:e2e:update:container # Refresh visuals in the pinned CI image
+pnpm test:e2e:update # Refresh Chromium baselines for the host platform
+pnpm test:e2e:update:container # Refresh Linux baselines in the pinned CI image
 pnpm test            # Run unit and E2E suites
 pnpm verify          # Lint, formatting, coverage, build, and E2E checks
 ```
@@ -97,9 +97,9 @@ reason in the Playwright report.
 
 Coverage includes application behavior, routes, shared components, pages, and i18n configuration. Styling, type declarations, generated translation data, and the browser bootstrap are intentionally outside the behavioral coverage denominator.
 
-The tracked visual matrix contains 31 region-level baselines. It captures the
-following states at `1440 × 1000` and `390 × 844`, plus the explicit
-intermediate viewports listed below:
+The tracked visual matrix contains 31 region-level baselines per supported
+platform. It captures the following states at `1440 × 1000` and `390 × 844`,
+plus the explicit intermediate viewports listed below:
 
 - Spanish navigation and Home hero
 - Spanish method/course headings and testimonials
@@ -112,10 +112,20 @@ intermediate viewports listed below:
 
 `pnpm test:e2e:update` runs only `tests/e2e/visual.spec.ts` in the desktop and
 mobile Chromium projects and uses Playwright's `all` update mode, so every
-tracked baseline is regenerated even when its pixels remain unchanged. Run the
-normal `pnpm verify` afterward. For the same Linux rendering environment used
-in CI, use `pnpm test:e2e:update:container` with Docker. Both CI and that helper
-pin Playwright's `v1.61.1-noble` image.
+host-platform baseline is regenerated even when its pixels remain unchanged.
+Playwright stores macOS and Linux images separately because browser text and
+fallback-font rendering varies by operating system. Do not replace one
+platform's images with another platform's output.
+
+CI treats the Linux set as authoritative. Use
+`pnpm test:e2e:update:container` when Docker is available; the helper fails with
+an actionable message when it is not. Otherwise, run the **Generate Linux
+visual baselines** workflow from GitHub Actions. It runs only on manual request,
+does not deploy or modify the repository, and uploads both the complete Linux
+image set and a binary patch for review. Download the artifact, inspect the
+images, apply `linux-visual-baselines.patch`, and run the normal verification
+gate before committing. CI, the helper, and the generation workflow all pin
+Playwright's `v1.61.1-noble` image.
 
 Playwright owns the routed journeys and visual baselines. It saves failure-only screenshots, retains traces on failures, and embeds full axe JSON results in its HTML report. Vitest remains the sole coverage runner and still saves browser evidence for unexpected component-test failures. CI uploads both runners' failure artifacts and coverage output.
 

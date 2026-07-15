@@ -1,0 +1,49 @@
+name: Generate Linux visual baselines
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "nihongo-visual-baselines-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.61.1-noble
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: "24.18.0"
+
+      - name: Install pnpm
+        run: npm install --global pnpm@11.13.0
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Linux visual baselines
+        run: pnpm test:e2e:update
+
+      - name: Create reviewable baseline patch
+        run: |
+          git add --intent-to-add -- tests/e2e/__screenshots__/visual.spec.ts/linux
+          git diff --binary -- tests/e2e/__screenshots__ > linux-visual-baselines.patch
+
+      - name: Upload Linux visual baselines
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: linux-visual-baselines-${{ github.run_attempt }}
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            linux-visual-baselines.patch
+            tests/e2e/__screenshots__/visual.spec.ts/linux/

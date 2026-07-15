@@ -2,6 +2,12 @@
 
 set -euo pipefail
 
+if ! command -v docker >/dev/null 2>&1; then
+  echo "Docker is required for CI-compatible visual baselines." >&2
+  echo "Without Docker, run the 'Generate Linux visual baselines' GitHub Actions workflow." >&2
+  exit 127
+fi
+
 readonly image="mcr.microsoft.com/playwright:v1.61.1-noble"
 readonly user_id="$(id -u)"
 readonly group_id="$(id -g)"
