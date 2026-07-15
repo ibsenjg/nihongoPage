@@ -70,7 +70,7 @@ pnpm test:full       # Run Vitest coverage, then the Playwright E2E matrix
 pnpm test:e2e        # Build and run the Playwright E2E matrix
 pnpm test:e2e:ui     # Open Playwright UI Mode to run and inspect tests visually
 pnpm test:e2e:headed # Watch the full E2E matrix run in a visible browser
-pnpm test:e2e:update # Refresh only the Chromium visual spec baselines
+pnpm test:e2e:update # Force-refresh every Chromium visual baseline
 pnpm test:e2e:update:container # Refresh visuals in the pinned CI image
 pnpm test            # Run unit and E2E suites
 pnpm verify          # Lint, formatting, coverage, build, and E2E checks
@@ -97,19 +97,25 @@ reason in the Playwright report.
 
 Coverage includes application behavior, routes, shared components, pages, and i18n configuration. Styling, type declarations, generated translation data, and the browser bootstrap are intentionally outside the behavioral coverage denominator.
 
-The critical visual matrix captures the following regions at `1440 × 1000` and `390 × 844`:
+The tracked visual matrix contains 31 region-level baselines. It captures the
+following states at `1440 × 1000` and `390 × 844`, plus the explicit
+intermediate viewports listed below:
 
-- Spanish navigation
-- Spanish home page
-- Japanese home page
-- Spanish courses page
-- Submitted Spanish contact form
+- Spanish navigation and Home hero
+- Spanish method/course headings and testimonials
+- Japanese Home hero
+- English Home copy, teacher glyph, course hero, and course-card kanji artwork
+- Spanish course cards and submitted contact form
 - English not-found page
+- Spanish Home hero at `833 × 816`
+- Spanish About hero at `926 × 715`
 
-`pnpm test:e2e:update` updates only `tests/e2e/visual.spec.ts`; run the normal
-`pnpm verify` afterward. For the same Linux rendering environment used in CI,
-use `pnpm test:e2e:update:container` with Docker. Both CI and that helper pin
-Playwright's `v1.61.1-noble` image.
+`pnpm test:e2e:update` runs only `tests/e2e/visual.spec.ts` in the desktop and
+mobile Chromium projects and uses Playwright's `all` update mode, so every
+tracked baseline is regenerated even when its pixels remain unchanged. Run the
+normal `pnpm verify` afterward. For the same Linux rendering environment used
+in CI, use `pnpm test:e2e:update:container` with Docker. Both CI and that helper
+pin Playwright's `v1.61.1-noble` image.
 
 Playwright owns the routed journeys and visual baselines. It saves failure-only screenshots, retains traces on failures, and embeds full axe JSON results in its HTML report. Vitest remains the sole coverage runner and still saves browser evidence for unexpected component-test failures. CI uploads both runners' failure artifacts and coverage output.
 
