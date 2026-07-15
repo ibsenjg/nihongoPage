@@ -10,7 +10,16 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+coverage
+.vitest-attachments
+playwright-report
+test-results
 *.local
+
+# Browser-test failure evidence (Playwright visual baselines remain tracked)
+src/**/__screenshots__
+**/*-actual.png
+**/*-diff.png
 
 # Editor directories and files
 .vscode/*
