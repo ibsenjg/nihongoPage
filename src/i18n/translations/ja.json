@@ -1,0 +1,293 @@
+{
+  "meta": {
+    "title": "日本語 (Nihongo)・オンラインで日本語を学ぼう",
+    "pageTitle": "日本語 (Nihongo)・{{page}}",
+    "description": "日本語オンラインスクールのMVP。コース、教材、無料リソースを紹介します。",
+    "routes": {
+      "home": "オンラインで日本語を学ぼう",
+      "courses": "コース",
+      "annualCourses": "年間コース",
+      "thematicCourses": "テーマ別コース",
+      "books": "本",
+      "materials": "教材",
+      "learnFree": "無料で学ぶ",
+      "about": "私たちについて",
+      "contact": "お問い合わせ",
+      "notFound": "ページが見つかりません"
+    }
+  },
+  "common": {
+    "brand": "日本語 (Nihongo)",
+    "brandHome": "日本語（Nihongo）、ホーム",
+    "brandMark": "日",
+    "sampleImage": "サンプル画像",
+    "pendingImage": "準備中の画像：",
+    "newsletter": "ニュースレター",
+    "availableLater": "今後公開予定",
+    "detailsSoon": "詳細は近日公開",
+    "name": "お名前",
+    "namePlaceholder": "お名前を入力",
+    "email": "メールアドレス",
+    "emailPlaceholder": "メールアドレスを入力",
+    "language": "言語",
+    "languages": { "es": "Español", "ja": "日本語", "en": "English" }
+  },
+  "navigation": {
+    "tagline": "焦らず、こつこつ日本語を学ぼう",
+    "futureFeature": "今後のバージョンで追加予定です",
+    "schoolAccess": "スクールログイン・近日公開",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる",
+    "skipToContent": "メインコンテンツへスキップ",
+    "routeAnnouncement": "ページを読み込みました：{{page}}",
+    "main": "メインナビゲーション",
+    "courses": "コース",
+    "books": "本",
+    "materials": "教材",
+    "learnFree": "無料で学ぶ",
+    "about": "私たちについて"
+  },
+  "footer": {
+    "description": "自分のペースで日本語と日本文化に近づけるオンラインスクールです。",
+    "socials": "ソーシャルメディアのサンプル",
+    "startHere": "ここから始めよう",
+    "japaneseCourses": "日本語コース",
+    "teachingMaterials": "学習教材",
+    "aboutUs": "私たちについて",
+    "project": "プロジェクト",
+    "contact": "お問い合わせ",
+    "faq": "よくある質問・今後追加予定",
+    "mvpStatus": "MVPの状況",
+    "mvpScope": "購入機能、オンライン教室、受講生ログインは、この最初のバージョンには含まれていません。",
+    "copyright": "© 2026 日本語 (Nihongo)・デモプロジェクト",
+    "legal": "プライバシー・Cookie・法的情報"
+  },
+  "placeholder": {
+    "glyphs": {
+      "teacher": "Profe",
+      "calendar": "Día",
+      "desk": "Aula",
+      "materials": "Libro",
+      "community": "Juntos",
+      "annual": "Ruta",
+      "thematic": "Tema",
+      "book": "Leer",
+      "free": "Inicio"
+    }
+  },
+  "newsletter": {
+    "image": "ニュースレターのイラスト",
+    "eyebrow": "日本語スナック",
+    "title": "無理なく学べる日本語を、あなたの受信箱へ。",
+    "description": "語彙や文化、学習を続けるための実践的なヒントを短くまとめてお届けします。",
+    "success": "ありがとうございます！デモフォームは動作しました。実際の配信機能は今後接続します。",
+    "submit": "スナックを受け取る"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Bienvenido",
+      "title": "日本語は裏技では身につきません。一歩ずつ道を進むことで身につきます。",
+      "description": "日本語学習者に向けて、学習法、文化、サポートを組み合わせたオンラインスクールです。",
+      "primaryAction": "自分の学び方を見つける",
+      "secondaryAction": "スクールについて知る",
+      "image": "講師の写真は準備中です"
+    },
+    "method": {
+      "eyebrow": "あなたに合う学習法",
+      "title": "新しい日本語の学び方。今度こそ、あなたに合う方法です！",
+      "description": "あなたの時間と学び方を大切にします。ペースを決めるのはあなた。私たちは道しるべ、練習、サポートを用意します。",
+      "features": {
+        "pace": {
+          "title": "自分のペースで進める",
+          "description": "締め切りに追われる必要はありません。いつ、どれだけ学ぶかはあなたが決められます。"
+        },
+        "classroom": {
+          "title": "いつでも開いている教室",
+          "description": "好きな場所で学べます。必要なのはインターネット環境と学びたい気持ちだけです。"
+        },
+        "resources": {
+          "title": "本当に役立つ教材",
+          "description": "レッスンの合間に練習できる、わかりやすい問題と教材を用意しています。"
+        }
+      }
+    },
+    "stats": {
+      "years": "年以上、学習者をサポート",
+      "students": "人の学習者がコミュニティに参加",
+      "courses": "以上のレベル別コース"
+    },
+    "courseSection": {
+      "eyebrow": "次の一歩を選ぼう",
+      "title": "日本をもっと身近に感じるためのコース",
+      "view": "コースを見る"
+    },
+    "community": {
+      "eyebrow": "Juntos",
+      "title": "人とつながるスクール。近道はなくても、そばにはチームがいます。",
+      "description": "わかりやすい学習ルート、学習者向けの解説、そして新しいことを学ぶ難しさを理解するコミュニティを提供します。",
+      "action": "一緒に始めませんか？",
+      "image": "コミュニティ写真は準備中です"
+    },
+    "testimonials": {
+      "eyebrow": "コミュニティの声",
+      "title": "私たちと学ぶということ",
+      "first": {
+        "quote": "「なぜこの語順になるのか、やっと理解できました。」",
+        "author": "ルシア・初級レベル"
+      },
+      "second": {
+        "quote": "「遅れていると感じることなく、自分のペースで勉強できます。」",
+        "author": "マルコス・テーマ別コース"
+      },
+      "third": {
+        "quote": "「言葉と文化を一緒に学べるので、好奇心がずっと続きます。」",
+        "author": "エバ・A2レベル"
+      }
+    }
+  },
+  "courses": {
+    "page": {
+      "eyebrow": "Aprender",
+      "title": "すべての段階に合う日本語コース",
+      "description": "ゼロから始めることも、途中から再開することも、特定のスキルに集中することもできます。",
+      "explore": "詳しく見る"
+    },
+    "annual": {
+      "eyebrow": "継続的な学び",
+      "title": "年間日本語コース",
+      "description": "レベルごとに進むガイド付きの学習プラン。確かな基礎を築き、一歩ずつ定着させます。",
+      "catalogEyebrow": "Un largo camino",
+      "catalogTitle": "年間コース：体系的に学ぶ道",
+      "catalogDescription": "体系、練習、サポートを組み合わせたレベル別プログラムです。",
+      "items": {
+        "a11": {
+          "title": "ゼロから始める初級",
+          "description": "文字、語彙、会話の最初の基礎を身につけます。"
+        },
+        "a12": {
+          "title": "初級 II",
+          "description": "学んだことを定着させ、より自然に表現できるようになります。"
+        },
+        "a21": {
+          "title": "初中級 I",
+          "description": "表現の幅を広げ、日常の場面を理解します。"
+        },
+        "a22": {
+          "title": "初中級 II",
+          "description": "より自然に、自分の力でコミュニケーションできるようになります。"
+        },
+        "b11": {
+          "title": "中級 I",
+          "description": "より複雑な文章や会話へステップアップします。"
+        },
+        "b12": {
+          "title": "中級 II",
+          "description": "すべてのスキルを深め、つなげていきます。"
+        }
+      }
+    },
+    "thematic": {
+      "eyebrow": "柔軟な学び",
+      "title": "テーマ別日本語コース",
+      "description": "ゼロから始めたい方、文法を伸ばしたい方、特定のテーマを深めたい方のための実践的なコースです。",
+      "catalogEyebrow": "Lo que te gusta",
+      "catalogTitle": "テーマ別コース：挑戦を選ぼう",
+      "catalogDescription": "特定の課題に自分のペースで取り組める短期コースです。",
+      "items": {
+        "travel": {
+          "badge": "Viaje",
+          "title": "旅行者のための日本語",
+          "description": "旅を楽しむためのフレーズ、習慣、役立つ知識を学びます。"
+        },
+        "kana": {
+          "badge": "Kana",
+          "title": "ひらがなとカタカナ",
+          "description": "2つの仮名を一歩ずつ読み書きできるようになります。"
+        },
+        "grammar": {
+          "badge": "Frases",
+          "title": "日本語文法",
+          "description": "知識を整理し、日本語の仕組みを理解します。"
+        },
+        "reading": {
+          "badge": "Lectura",
+          "title": "読解トレーニング",
+          "description": "レベル別の文章で、読む速度、理解力、自信を高めます。"
+        }
+      }
+    }
+  },
+  "resources": {
+    "books": {
+      "eyebrow": "Leer",
+      "title": "学びを続けるための本",
+      "description": "好奇心を実践につなげるために作られた読み物とワークブックです。",
+      "items": ["旅行者のための日本語", "漢字の魅力", "レベル別読み物"]
+    },
+    "materials": {
+      "eyebrow": "Práctica",
+      "title": "学習教材",
+      "description": "学習を整理し、継続して練習するためのシンプルな教材です。",
+      "items": ["文字練習帳", "学習プランナー", "JLPT対策キット"]
+    },
+    "free": {
+      "eyebrow": "Gratis",
+      "title": "無料で学び始めよう",
+      "description": "短いレッスンで学習法を試し、次に進む道を見つけましょう。",
+      "items": ["スタートガイド", "メールで届くミニレッスン", "語彙リソース"]
+    },
+    "itemLabel": "リソース {{number}}",
+    "sampleDescription": "実際のカタログを追加する前に構成を確認するためのサンプルコンテンツです。"
+  },
+  "about": {
+    "eyebrow": "Nosotros",
+    "title": "画面の中のレッスンだけではない学び",
+    "description": "日本語をわかりやすく、背景と親しみを込めて伝えるために生まれたプロジェクトです。",
+    "image": "チーム写真は準備中です",
+    "methodEyebrow": "私たちの教え方",
+    "methodTitle": "言葉と文化を一緒に学ぶと、日本がもっとよくわかります。",
+    "methodDescription": "ネイティブの視点と、学ぶときに生まれる疑問に寄り添った解説を組み合わせています。",
+    "mvpDescription": "このMVPでは公開部分の体験を紹介しています。実際のプロフィール、チーム全体、教室へのアクセスは今後追加します。",
+    "values": {
+      "clarity": {
+        "title": "わかりやすさ",
+        "description": "感心させるより、まずわかりやすく伝える。"
+      },
+      "consistency": {
+        "title": "継続",
+        "description": "一気に頑張るより、毎日少しずつ続ける。"
+      },
+      "closeness": {
+        "title": "寄り添い",
+        "description": "一緒に学ぶ人がいると、道のりが変わります。"
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "Contacto",
+    "title": "お話ししましょう",
+    "description": "学びたいことを教えてください。最適なスタート地点を一緒に見つけます。",
+    "sectionTitle": "いつでもご連絡ください",
+    "formDescription": "このフォームは操作できますが、まだ外部サービスへデータを送信しません。",
+    "message": "どのようなお手伝いが必要ですか？",
+    "submit": "メッセージを準備する",
+    "success": "メッセージを準備しました。実際の送信機能は今後接続します。"
+  },
+  "cta": {
+    "eyebrow": "Paso a paso",
+    "title": "日本語は簡単！いくつかのポイントを知れば大丈夫です！",
+    "action": "無料教材を試す"
+  },
+  "notFound": {
+    "eyebrow": "Perdido",
+    "title": "このページは道に迷ってしまったようです。",
+    "action": "ホームに戻る"
+  },
+  "error": {
+    "eyebrow": "エラーが発生しました",
+    "title": "このページを表示できませんでした。",
+    "description": "もう一度お試しください。問題が続く場合はホームに戻ってください。",
+    "retry": "もう一度試す",
+    "home": "ホームに戻る"
+  }
+}

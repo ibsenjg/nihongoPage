@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "title": "Nihongo (日本語) · Aprende japonés online",
+    "pageTitle": "Nihongo (日本語) · {{page}}",
+    "description": "MVP de una escuela online de japonés: cursos, materiales y recursos gratuitos.",
+    "routes": {
+      "home": "Aprende japonés online",
+      "courses": "Cursos",
+      "annualCourses": "Cursos anuales",
+      "thematicCourses": "Cursos temáticos",
+      "books": "Libros",
+      "materials": "Materiales",
+      "learnFree": "Aprende gratis",
+      "about": "Conócenos",
+      "contact": "Contacto",
+      "notFound": "Página no encontrada"
+    }
+  },
+  "common": {
+    "brand": "Nihongo (日本語)",
+    "brandHome": "Nihongo (日本語), inicio",
+    "brandMark": "日",
+    "sampleImage": "Imagen de muestra",
+    "pendingImage": "Imagen pendiente:",
+    "newsletter": "Newsletter",
+    "availableLater": "Disponible más adelante",
+    "detailsSoon": "Detalles próximamente",
+    "name": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "tu@email.com",
+    "language": "Idioma",
+    "languages": { "es": "Español", "ja": "日本語", "en": "English" }
+  },
+  "navigation": {
+    "tagline": "Aprende japonés con calma y constancia",
+    "futureFeature": "Se añadirá en una fase posterior",
+    "schoolAccess": "Acceso escuela · próximamente",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "skipToContent": "Saltar al contenido principal",
+    "routeAnnouncement": "Página cargada: {{page}}",
+    "main": "Principal",
+    "courses": "Cursos",
+    "books": "Libros",
+    "materials": "Materiales",
+    "learnFree": "Aprende gratis",
+    "about": "Conócenos"
+  },
+  "footer": {
+    "description": "Una escuela online para acercarte al japonés y a su cultura a tu ritmo.",
+    "socials": "Redes sociales de muestra",
+    "startHere": "Empieza por aquí",
+    "japaneseCourses": "Cursos de japonés",
+    "teachingMaterials": "Materiales didácticos",
+    "aboutUs": "Sobre nosotros",
+    "project": "El proyecto",
+    "contact": "Contacto",
+    "faq": "Preguntas frecuentes · después",
+    "mvpStatus": "Estado del MVP",
+    "mvpScope": "Las compras, el aula y el acceso de alumnado quedan fuera de esta primera versión.",
+    "copyright": "© 2026 Nihongo (日本語) · Proyecto demostrativo",
+    "legal": "Privacidad · Cookies · Aviso legal"
+  },
+  "placeholder": {
+    "glyphs": {
+      "teacher": "先生",
+      "calendar": "日",
+      "desk": "学",
+      "materials": "本",
+      "community": "和",
+      "annual": "道",
+      "thematic": "好",
+      "book": "読",
+      "free": "始"
+    }
+  },
+  "newsletter": {
+    "image": "Ilustración de newsletter",
+    "eyebrow": "Nihongo snacks",
+    "title": "Japonés sin agobios, directo a tu bandeja de entrada.",
+    "description": "Una píldora breve con vocabulario, cultura y consejos prácticos para mantener la motivación.",
+    "success": "¡Gracias! El formulario de demostración funciona; conectaremos el envío más adelante.",
+    "submit": "Quiero mis snacks"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "ようこそ",
+      "title": "El japonés no se aprende con trucos. Se aprende recorriendo el camino.",
+      "description": "Una escuela online que combina método, cultura y acompañamiento para estudiantes de habla hispana.",
+      "primaryAction": "Descubre tu camino",
+      "secondaryAction": "Conoce la escuela",
+      "image": "Retrato de profesor pendiente"
+    },
+    "method": {
+      "eyebrow": "Un método que encaja contigo",
+      "title": "¡Tu nueva forma de aprender Japonés, esta te funciona!",
+      "description": "Respetamos tu tiempo y tu forma de estudiar. Tú marcas el ritmo; nosotros ponemos el mapa, la práctica y el acompañamiento.",
+      "features": {
+        "pace": {
+          "title": "Avanza a tu ritmo",
+          "description": "Sin fechas que te agobien. Tú decides cuándo estudiar y cuánto avanzar."
+        },
+        "classroom": {
+          "title": "Tu aula siempre abierta",
+          "description": "Estudia donde quieras. Solo necesitas conexión y ganas de aprender."
+        },
+        "resources": {
+          "title": "Recursos que sí ayudan",
+          "description": "Ejercicios y materiales claros para practicar entre lecciones."
+        }
+      }
+    },
+    "stats": {
+      "years": "años acompañando a estudiantes",
+      "students": "alumnos en nuestra comunidad",
+      "courses": "cursos para distintas etapas"
+    },
+    "courseSection": {
+      "eyebrow": "Elige tu siguiente paso",
+      "title": "Un curso para acercarte un poco más a Japón",
+      "view": "Ver cursos"
+    },
+    "community": {
+      "eyebrow": "いっしょに",
+      "title": "Una escuela con personas. Sin atajos, pero con un equipo a tu lado.",
+      "description": "Te damos una ruta clara, explicaciones pensadas para hispanohablantes y una comunidad que entiende lo que cuesta aprender algo nuevo.",
+      "action": "¿Te vienes?",
+      "image": "Foto de la comunidad pendiente"
+    },
+    "testimonials": {
+      "eyebrow": "Voces de la comunidad",
+      "title": "Así se vive aprender con nosotros",
+      "first": {
+        "quote": "“Por fin entiendo por qué se construyen así las frases.”",
+        "author": "Lucía · nivel inicial"
+      },
+      "second": {
+        "quote": "“Puedo estudiar sin sentir que siempre llego tarde.”",
+        "author": "Marcos · curso temático"
+      },
+      "third": {
+        "quote": "“La mezcla de idioma y cultura mantiene viva mi curiosidad.”",
+        "author": "Eva · nivel A2"
+      }
+    }
+  },
+  "courses": {
+    "page": {
+      "eyebrow": "学ぶ",
+      "title": "Cursos de japonés para cada etapa",
+      "description": "Empieza desde cero, retoma lo que dejaste a medias o enfócate en una habilidad concreta.",
+      "explore": "Explorar"
+    },
+    "annual": {
+      "eyebrow": "Formación continua",
+      "title": "Cursos anuales de japonés",
+      "description": "Un recorrido guiado por niveles, con una base sólida y tiempo para afianzar cada paso.",
+      "catalogEyebrow": "長い道",
+      "catalogTitle": "Cursos anuales: una ruta completa",
+      "catalogDescription": "Programas por niveles para aprender con estructura, práctica y acompañamiento.",
+      "items": {
+        "a11": {
+          "title": "Nivel inicial desde cero",
+          "description": "Tu primera base de escritura, vocabulario y conversación."
+        },
+        "a12": {
+          "title": "Nivel inicial II",
+          "description": "Consolida lo aprendido y empieza a expresarte con más soltura."
+        },
+        "a21": {
+          "title": "Nivel elemental I",
+          "description": "Amplía estructuras y comprende situaciones cotidianas."
+        },
+        "a22": {
+          "title": "Nivel elemental II",
+          "description": "Gana autonomía para comunicarte con naturalidad."
+        },
+        "b11": {
+          "title": "Nivel intermedio I",
+          "description": "Da el salto a textos y conversaciones más complejas."
+        },
+        "b12": {
+          "title": "Nivel intermedio II",
+          "description": "Profundiza y conecta todas tus competencias."
+        }
+      }
+    },
+    "thematic": {
+      "eyebrow": "Aprendizaje flexible",
+      "title": "Cursos temáticos de japonés",
+      "description": "Retos concretos para empezar desde cero, mejorar tu gramática o profundizar en un tema.",
+      "catalogEyebrow": "好きなこと",
+      "catalogTitle": "Cursos temáticos: elige tu reto",
+      "catalogDescription": "Formaciones más cortas para trabajar una necesidad concreta a tu propio ritmo.",
+      "items": {
+        "travel": {
+          "badge": "旅",
+          "title": "Japonés para viajeros",
+          "description": "Frases, costumbres y recursos para disfrutar de tu viaje."
+        },
+        "kana": {
+          "badge": "あ",
+          "title": "Hiragana y katakana",
+          "description": "Aprende a leer y escribir los dos silabarios paso a paso."
+        },
+        "grammar": {
+          "badge": "文",
+          "title": "Gramática japonesa",
+          "description": "Ordena lo que sabes y entiende cómo funciona el idioma."
+        },
+        "reading": {
+          "badge": "読",
+          "title": "Entrenamiento de lectura",
+          "description": "Mejora ritmo, comprensión y confianza con textos graduados."
+        }
+      }
+    }
+  },
+  "resources": {
+    "books": {
+      "eyebrow": "読む",
+      "title": "Libros para seguir aprendiendo",
+      "description": "Lecturas y cuadernos diseñados para convertir la curiosidad en práctica.",
+      "items": [
+        "Japonés para viajeros",
+        "La magia de los kanji",
+        "Lecturas graduadas"
+      ]
+    },
+    "materials": {
+      "eyebrow": "練習",
+      "title": "Materiales didácticos",
+      "description": "Recursos sencillos para organizar el estudio y practicar de forma constante.",
+      "items": [
+        "Cuaderno de escritura",
+        "Planificador de estudio",
+        "Kit de preparación JLPT"
+      ]
+    },
+    "free": {
+      "eyebrow": "無料",
+      "title": "Empieza a aprender gratis",
+      "description": "Prueba el método con pequeñas lecciones y descubre por dónde continuar.",
+      "items": [
+        "Guía para empezar",
+        "Mini lecciones por email",
+        "Recursos de vocabulario"
+      ]
+    },
+    "itemLabel": "Recurso {{number}}",
+    "sampleDescription": "Contenido de muestra para definir la estructura antes de incorporar el catálogo real."
+  },
+  "about": {
+    "eyebrow": "私たち",
+    "title": "Mucho más que una pantalla con lecciones",
+    "description": "Un proyecto nacido para explicar japonés a hispanohablantes con claridad, contexto y cercanía.",
+    "image": "Foto del equipo pendiente",
+    "methodEyebrow": "Nuestra manera de enseñar",
+    "methodTitle": "Japón se entiende mejor cuando idioma y cultura avanzan juntos.",
+    "methodDescription": "La escuela combina una mirada nativa con explicaciones pensadas para las dudas que aparecen al aprender desde el español.",
+    "mvpDescription": "Este MVP presenta la experiencia pública. Los perfiles reales, el equipo completo y el acceso al aula se incorporarán en fases posteriores.",
+    "values": {
+      "clarity": {
+        "title": "Claridad",
+        "description": "Explicar bien antes que impresionar."
+      },
+      "consistency": {
+        "title": "Constancia",
+        "description": "Un poco cada día vale más que un sprint."
+      },
+      "closeness": {
+        "title": "Cercanía",
+        "description": "Aprender acompañado cambia el recorrido."
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "連絡",
+    "title": "Hablemos",
+    "description": "Cuéntanos qué quieres aprender y te ayudaremos a encontrar el mejor punto de partida.",
+    "sectionTitle": "Estamos al otro lado",
+    "formDescription": "Este formulario es interactivo, aunque todavía no envía datos a ningún servicio.",
+    "message": "¿En qué podemos ayudarte?",
+    "submit": "Preparar mensaje",
+    "success": "Mensaje preparado. Conectaremos el envío real en una fase posterior."
+  },
+  "cta": {
+    "eyebrow": "一歩ずつ",
+    "title": "¡El japonés es fácil, solo hay que saber algunas cosas!",
+    "action": "Probar recursos gratis"
+  },
+  "notFound": {
+    "eyebrow": "迷子",
+    "title": "Esta página se ha perdido por el camino.",
+    "action": "Volver al inicio"
+  },
+  "error": {
+    "eyebrow": "Algo ha salido mal",
+    "title": "No hemos podido mostrar esta página.",
+    "description": "Inténtalo de nuevo. Si el problema continúa, vuelve al inicio.",
+    "retry": "Intentar de nuevo",
+    "home": "Volver al inicio"
+  }
+}
