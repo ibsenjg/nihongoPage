@@ -66,34 +66,38 @@ Use the language selector in the header to switch among Spanish, Japanese, and E
 ```bash
 pnpm test:unit       # Run colocated Vitest component and composition tests
 pnpm test:coverage   # Enforce 100% behavioral source coverage with Vitest
-pnpm test:full       # Run Vitest coverage, then the Playwright E2E matrix
-pnpm test:e2e        # Build and run the Playwright E2E matrix
-pnpm test:e2e:ui     # Open Playwright UI Mode to run and inspect tests visually
-pnpm test:e2e:headed # Watch the full E2E matrix run in a visible browser
-pnpm test:e2e:update # Refresh Chromium baselines for the host platform
-pnpm test:e2e:update:container # Refresh Linux baselines in the pinned CI image
-pnpm test            # Run unit and E2E suites
-pnpm verify          # Lint, formatting, coverage, build, and E2E checks
+pnpm test:full       # Run coverage, functional E2E, and visual regression
+pnpm test:e2e        # Build and run functional Playwright E2E checks
+pnpm test:e2e:ui     # Inspect functional E2E checks in Playwright UI Mode
+pnpm test:e2e:headed # Watch functional E2E checks in a visible browser
+pnpm test:visual     # Compare the host platform's visual baselines
+pnpm test:visual:ui  # Inspect visual regression in Playwright UI Mode
+pnpm test:visual:headed # Watch visual regression in a visible browser
+pnpm test:visual:update # Refresh baselines for the host platform
+pnpm test:visual:update:container # Refresh Linux baselines in the pinned CI image
+pnpm test            # Run unit and functional E2E suites
+pnpm verify          # Run the deployment gate without visual comparisons
 ```
 
 Coverage is a Vitest option, not a Playwright option. Do not append
 `--coverage` to `pnpm test`: that command chains both runners, so trailing
 options can reach Playwright. Use `pnpm test:coverage` for coverage only,
-`pnpm test:full` for coverage plus E2E, or `pnpm verify` for the complete
-quality gate.
+`pnpm test:full` for coverage, functional E2E, and visual regression, or
+`pnpm verify` for the deployment quality gate.
 
-Use `pnpm test:e2e:ui` for the clearest visual workflow. Playwright opens an
+Use `pnpm test:e2e:ui` to inspect functional journeys and
+`pnpm test:visual:ui` to review screenshot comparisons. Playwright opens an
 interactive test explorer where you can run one test or an entire group, watch
-each action, inspect DOM snapshots, and review screenshot comparisons and
-traces. Use `pnpm test:e2e:headed` when you simply want to watch the complete
-desktop and mobile matrix execute sequentially.
+each action, inspect DOM snapshots, and review traces. Use the corresponding
+`headed` command when you simply want to watch a matrix execute sequentially.
 
-The Chromium projects own the complete route, Axe, interaction, and visual
+The functional E2E gate covers the complete Chromium route, Axe, and interaction
 matrix. A deliberately small WebKit project smoke-tests Home, navigation,
 language persistence, and both demo forms without duplicating the entire
 Chromium suite. Nine Chromium project/test combinations are intentionally
 skipped when a scenario belongs to only one viewport; every skip includes its
-reason in the Playwright report.
+reason in the Playwright report. Visual regression is tagged `@visual` and runs
+separately in the desktop and mobile Chromium projects.
 
 Coverage includes application behavior, routes, shared components, pages, and i18n configuration. Styling, type declarations, generated translation data, and the browser bootstrap are intentionally outside the behavioral coverage denominator.
 
@@ -110,24 +114,29 @@ plus the explicit intermediate viewports listed below:
 - Spanish Home hero at `833 × 816`
 - Spanish About hero at `926 × 715`
 
-`pnpm test:e2e:update` runs only `tests/e2e/visual.spec.ts` in the desktop and
-mobile Chromium projects and uses Playwright's `all` update mode, so every
-host-platform baseline is regenerated even when its pixels remain unchanged.
+`pnpm test:visual:update` runs only the `@visual` tests in the desktop and mobile
+Chromium projects and uses Playwright's `all` update mode, so every host-platform
+baseline is regenerated even when its pixels remain unchanged.
 Playwright stores macOS and Linux images separately because browser text and
 fallback-font rendering varies by operating system. Do not replace one
 platform's images with another platform's output.
 
-CI treats the Linux set as authoritative. Use
-`pnpm test:e2e:update:container` when Docker is available; the helper fails with
-an actionable message when it is not. Otherwise, run the **Generate Linux
-visual baselines** workflow from GitHub Actions. It runs only on manual request,
-does not deploy or modify the repository, and uploads both the complete Linux
-image set and a binary patch for review. Download the artifact, inspect the
-images, apply `linux-visual-baselines.patch`, and run the normal verification
-gate before committing. Normal CI refuses to create missing snapshots, while
-the generation command explicitly uses Playwright's `all` update mode. CI, the
-helper, and the generation workflow all pin Playwright's `v1.61.1-noble`
-image.
+Use `pnpm test:visual:update:container` when Docker is available to create a
+Linux set; the helper fails with an actionable message when Docker is missing.
+Otherwise, run the **Generate Linux visual baselines** workflow from GitHub
+Actions. It runs only on manual request, does not deploy or modify the
+repository, and uploads both the complete Linux image set and a binary patch for
+review. Download the artifact, inspect the images, and apply
+`linux-visual-baselines.patch` before committing. Snapshot comparison refuses to
+create missing images, while the generation command explicitly uses
+Playwright's `all` update mode. The helper and generation workflow pin
+Playwright's `v1.61.1-noble` image.
+
+Visual comparisons intentionally do not block the deployment gate. This keeps
+platform-specific baseline maintenance from being reported as an application
+failure. Functional Playwright failures still save failure-only screenshots and
+traces, and `pnpm test:full` remains available when a release should include the
+visual matrix.
 
 Playwright owns the routed journeys and visual baselines. It saves failure-only screenshots, retains traces on failures, and embeds full axe JSON results in its HTML report. Vitest remains the sole coverage runner and still saves browser evidence for unexpected component-test failures. CI uploads both runners' failure artifacts and coverage output.
 
@@ -139,8 +148,11 @@ reduced motion, and future ARC Toolkit findings.
 
 ## Deployment
 
-Every pull request runs the complete verification gate in the pinned Playwright
-container. Pushes to `master` and manual workflow runs deploy only after that
-gate succeeds. The production bundle is published from `dist` to GitHub Pages.
-Dependabot groups production and development dependency updates and checks
-GitHub Actions monthly.
+Every pull request runs the deployment verification gate in the pinned
+Playwright container. The gate includes linting, formatting, 100% Vitest
+coverage, production build, functional E2E journeys, accessibility scans, and
+WebKit smoke coverage; visual comparisons remain an explicit separate check.
+Pushes to `master` and manual workflow runs deploy only after the gate succeeds.
+The production bundle is published from `dist` to GitHub Pages. Dependabot
+groups production and development dependency updates and checks GitHub Actions
+monthly.
