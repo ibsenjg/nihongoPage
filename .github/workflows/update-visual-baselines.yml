@@ -31,7 +31,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Generate Linux visual baselines
-        run: pnpm test:e2e:update
+        run: pnpm test:visual:update
 
       - name: Create reviewable baseline patch
         run: |

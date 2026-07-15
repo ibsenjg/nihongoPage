@@ -19,4 +19,4 @@ docker run --rm --init --ipc=host \
   --tmpfs "/work/node_modules:rw,uid=${user_id},gid=${group_id},mode=0755" \
   --workdir /work \
   "${image}" \
-  bash -lc 'mkdir -p "$HOME" && corepack pnpm install --frozen-lockfile && corepack pnpm test:e2e:update'
+  bash -lc 'mkdir -p "$HOME" && corepack pnpm install --frozen-lockfile && corepack pnpm test:visual:update'
